@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Portfolio</title>
+<link rel="stylesheet" href="profile.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+
+<canvas id="particles"></canvas>
+
+<header>
+<nav class="navbar">
+<h2 class="logo">MyPortfolio</h2>
+<ul class="nav-links" id="navLinks">
+<li><a href="#">Home</a></li>
+<li><a href="#skills">Skills</a></li>
+<li><a href="#projects">Projects</a></li>
+<li><a href="https://github.com/YOUR_USERNAME" target="_blank">GitHub</a></li>
+</ul>
+<div class="menu-toggle" id="menuToggle"><i class="fas fa-bars"></i></div>
+</nav>
+</header>
+
+<section class="hero glass">
+<img src="profile.jpg" class="profile" alt="Profile">
+<h1>Hello, I'm <span class="name">Your Name</span></h1>
+<h2>I am a <span id="typing"></span></h2>
+<a href="cv.pdf" download class="btn">Download CV</a>
+<div class="social">
+  <a href="https://github.com/YOUR_USERNAME" target="_blank"><i class="fab fa-github"></i></a>
+  <a href="https://www.linkedin.com/in/YOUR_USERNAME" target="_blank"><i class="fab fa-linkedin"></i></a>
+  <a href="https://wa.me/1234567890" target="_blank"><i class="fab fa-whatsapp"></i></a>
+</div>
+</section>
+
+<section id="skills" class="skills glass">
+<h2>My Skills</h2>
+<div class="skill"><p>HTML</p><div class="bar"><span style="width:90%"></span></div></div>
+<div class="skill"><p>CSS</p><div class="bar"><span style="width:85%"></span></div></div>
+<div class="skill"><p>JavaScript</p><div class="bar"><span style="width:75%"></span></div></div>
+</section>
+
+<section id="projects" class="projects glass">
+<h2>My Projects</h2>
+<div class="project-container">
+<div class="project-card" onclick="openProjectByIndex(0)">
+<h3>Technical Database</h3>
+<p>Website for technical information.</p>
+<a>View</a>
+</div>
+<div class="project-card" onclick="openProjectByIndex(1)">
+<h3>Calculator</h3>
+<p>Simple JS calculator.</p>
+<a>View</a>
+</div>
+</div>
+</section>
+
+<div id="projectModal" class="modal">
+<div class="modal-content">
+<span class="close" onclick="closeProject()">&times;</span>
+<h2 id="projectTitle"></h2>
+
+<div class="gallery-container">
+<button class="gallery-nav prev" onclick="prevImage()">&#10094;</button>
+<div class="slider-wrapper">
+<div class="slider" id="slider"></div>
+</div>
+<button class="gallery-nav next" onclick="nextImage()">&#10095;</button>
+</div>
+
+<div id="galleryDots" class="gallery-dots"></div>
+<p id="projectDescription"></p>
+<div class="modal-links">
+<a id="projectDemo" target="_blank">Live Demo</a>
+<a id="projectGit" target="_blank">GitHub</a>
+</div>
+<div class="modal-nav">
+<button onclick="prevProject()">Previous Project</button>
+<button onclick="nextProject()">Next Project</button>
+</div>
+</div>
+</div>
+
+<script src="profile.js"></script>
+</body>
+</html>
