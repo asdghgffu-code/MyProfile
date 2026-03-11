@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Portfolio</title>
+<link rel="stylesheet" href="profile.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+
+<canvas id="particles"></canvas>
+
+<header>
+  <nav class="navbar">
+    <h2 class="logo">MyPortfolio</h2>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#">Home</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="https://github.com/YOUR_USERNAME" target="_blank">GitHub</a></li>
+    </ul>
+    <div class="menu-toggle" id="menuToggle"><i class="fas fa-bars"></i></div>
+  </nav>
+</header>
+
+<section class="hero glass">
+  <img src="profile.jpg" class="profile" alt="Profile">
+  <h1>Hello, I'm <span class="name">Your Name</span></h1>
+  <h2>I am a <span id="typing"></span></h2>
+
+  <a href="cv.pdf" download class="btn">Download CV</a>
+  <div class="social">
+    <a href="https://github.com/YOUR_USERNAME" target="_blank"><i class="fab fa-github"></i></a>
+    <a href="https://www.linkedin.com/in/YOUR_USERNAME" target="_blank"><i class="fab fa-linkedin"></i></a>
+    <a href="https://wa.me/1234567890" target="_blank"><i class="fab fa-whatsapp"></i></a>
+  </div>
+</section>
+
+<section id="projects" class="projects glass">
+  <h2>My Projects</h2>
+  <div class="project-deck" id="projectDeck"></div>
+</section>
+
+<!-- Modal for project gallery -->
+<div id="projectModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeProject()">&times;</span>
+    <h2 id="projectTitle"></h2>
+  
+    <div class="gallery-container">
+      <button class="gallery-nav prev" onclick="prevImage()">&#10094;</button>
+      <div class="slider-wrapper">
+        <div class="slider" id="slider"></div>
+      </div>
+      <button class="gallery-nav next" onclick="nextImage()">&#10095;</button>
+    </div>
+    <div id="galleryDots" class="gallery-dots"></div>
+    <p id="projectDescription"></p>
+    <button id="backButton" class="back-btn">Back</button>
+    <div class="modal-nav">
+      <button onclick="prevProject()">Previous Project</button>
+      <button onclick="nextProject()">Next Project</button>
+    </div>
+  </div>
+</div>
+
+</section>
+
+
+<section id="contact" class="contact">
+
+<h2>Contact</h2>
+
+<p>Email: ahmed@email.com</p>
+
+<p>Phone: +91 000000000</p>
+
+</section>
+
+<script src="profile.js"></script>
+                              
+</body>
+</html>
