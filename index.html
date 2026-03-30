@@ -1,83 +1,334 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>My Portfolio</title>
-<link rel="stylesheet" href="profile.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, maximum-scale=1.0">
+    <title>AHMED MOHAMED - Professional Portfolio</title>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Roboto:wght@300;400;500;700&family=Cairo:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- AOS Animation -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <!-- Swiper for Mobile Sliders -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="profile.css">
 </head>
 <body>
+    <!-- Particles Background -->
+    <div id="particles-bg"></div>
 
-<canvas id="particles"></canvas>
-
-<header>
-  <nav class="navbar">
-    <h2 class="logo">MyPortfolio</h2>
-    <ul class="nav-links" id="navLinks">
-      <li><a href="#">Home</a></li>
-      <li><a href="#projects">Projects</a></li>
-      <li><a href="https://github.com/YOUR_USERNAME" target="_blank">GitHub</a></li>
-    </ul>
-    <div class="menu-toggle" id="menuToggle"><i class="fas fa-bars"></i></div>
-  </nav>
-</header>
-
-<section class="hero glass">
-  <img src="profile.jpg" class="profile" alt="Profile">
-  <h1>Hello, I'm <span class="name">Your Name</span></h1>
-  <h2>I am a <span id="typing"></span></h2>
-
-  <a href="cv.pdf" download class="btn">Download CV</a>
-  <div class="social">
-    <a href="https://github.com/YOUR_USERNAME" target="_blank"><i class="fab fa-github"></i></a>
-    <a href="https://www.linkedin.com/in/YOUR_USERNAME" target="_blank"><i class="fab fa-linkedin"></i></a>
-    <a href="https://wa.me/1234567890" target="_blank"><i class="fab fa-whatsapp"></i></a>
-  </div>
-</section>
-
-<section id="projects" class="projects glass">
-  <h2>My Projects</h2>
-  <div class="project-deck" id="projectDeck"></div>
-</section>
-
-<!-- Modal for project gallery -->
-<div id="projectModal" class="modal">
-  <div class="modal-content">
-    <span class="close" onclick="closeProject()">&times;</span>
-    <h2 id="projectTitle"></h2>
-  
-    <div class="gallery-container">
-      <button class="gallery-nav prev" onclick="prevImage()">&#10094;</button>
-      <div class="slider-wrapper">
-        <div class="slider" id="slider"></div>
-      </div>
-      <button class="gallery-nav next" onclick="nextImage()">&#10095;</button>
+    <!-- Admin Login Modal (Private) -->
+    <div id="adminModal" class="admin-modal">
+        <div class="admin-modal-content">
+            <div class="admin-modal-header">
+                <i class="fas fa-lock"></i>
+                <h3>Admin Access</h3>
+            </div>
+            <div class="admin-modal-body">
+                <input type="password" id="adminPassword" placeholder="Enter admin password" class="admin-input">
+                <button id="adminLoginBtn" class="admin-login-btn">Login</button>
+                <div id="adminError" class="admin-error"></div>
+            </div>
+        </div>
     </div>
-    <div id="galleryDots" class="gallery-dots"></div>
-    <p id="projectDescription"></p>
-    <button id="backButton" class="back-btn">Back</button>
-    <div class="modal-nav">
-      <button onclick="prevProject()">Previous Project</button>
-      <button onclick="nextProject()">Next Project</button>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <!-- Logo Removed -->
+        
+        <!-- Professional Transparent Menu Button -->
+        <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+            <svg class="menu-icon-svg" viewBox="0 0 24 24" width="24" height="24">
+                <path class="menu-line-top" d="M3 6H21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                <path class="menu-line-middle" d="M3 12H21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                <path class="menu-line-bottom" d="M3 18H21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+        </button>
+        
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#home" id="navHome">Home</a></li>
+            <li><a href="#skills" id="navSkills">Skills</a></li>
+            <li><a href="#projects" id="navProjects">Projects</a></li>
+            <li><a href="#contact" id="navContact">Contact</a></li>
+        </ul>
+        <div class="action-buttons">
+            <div class="lang-toggle" id="langToggle">
+                <span class="lang-en active">EN</span>
+                <span class="lang-ar">AR</span>
+            </div>
+            <div class="theme-toggle" id="themeToggle">
+                <i class="fas fa-moon"></i>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content" data-aos="fade-up">
+            <div class="profile-container">
+                <img id="profileImage" src="profile.jpg" alt="AHMED MOHAMED" class="profile-img" onerror="this.src='https://ui-avatars.com/api/?background=2563eb&color=fff&size=150&name=AHMED'">
+                <div class="profile-overlay" id="profileOverlay" style="display: none;">
+                    <label for="photoUpload" class="upload-btn">
+                        <i class="fas fa-camera"></i>
+                        <span id="changePhotoText">Change Photo</span>
+                    </label>
+                    <input type="file" id="photoUpload" accept="image/*" style="display: none;">
+                </div>
+                <div id="adminIndicator" class="admin-indicator" style="display: none;">
+                    <i class="fas fa-user-shield"></i>
+                    <span>Admin Mode</span>
+                </div>
+            </div>
+            <h1>
+                <span id="heroHello">Hello, I'm</span>
+                <span class="highlight" id="heroName">AHMED MOHAMED</span>
+            </h1>
+            <div class="typing-wrapper">
+                <span id="heroIam">I am a</span>
+                <span id="typing-text"></span>
+            </div>
+            <a href="#" class="btn btn-primary" id="downloadCV">
+                <i class="fas fa-download"></i>
+                <span id="downloadText">Download CV</span>
+            </a>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="skills">
+        <div class="container">
+            <h2 class="section-title" id="skillsTitle" data-aos="fade-up">My Skills</h2>
+            
+            <!-- Desktop Skills Grid -->
+            <div class="skills-grid desktop-only" id="skillsGridDesktop"></div>
+            
+            <!-- Mobile Skills Carousel -->
+            <div class="skills-carousel mobile-only swiper" id="skillsCarousel">
+                <div class="swiper-wrapper" id="skillsSwiperWrapper"></div>
+                <div class="swiper-pagination"></div>
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="projects">
+        <div class="container">
+            <h2 class="section-title" id="projectsTitle" data-aos="fade-up">My Projects</h2>
+            
+            <!-- Desktop Projects Grid -->
+            <div class="projects-grid desktop-only" id="projectsGridDesktop"></div>
+            
+            <!-- Mobile Projects Carousel -->
+            <div class="projects-carousel mobile-only swiper" id="projectsCarousel">
+                <div class="swiper-wrapper" id="projectsSwiperWrapper"></div>
+                <div class="swiper-pagination"></div>
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title" id="contactTitle" data-aos="fade-up">Contact Me</h2>
+            
+            <!-- Desktop Contact Layout -->
+            <div class="contact-wrapper desktop-only">
+                <div class="contact-info" data-aos="fade-right">
+                    <div class="info-card">
+                        <i class="fas fa-envelope"></i>
+                        <h3 id="contactEmail">Email</h3>
+                        <p>asdghffu@gmail.com</p>
+                        <button class="btn-copy" onclick="copyToClipboard('asdghffu@gmail.com')">
+                            <i class="fas fa-copy"></i>
+                        </button>
+                    </div>
+                    <div class="info-card">
+                        <i class="fas fa-phone"></i>
+                        <h3 id="contactPhone">Phone</h3>
+                        <p>+91 8885776712</p>
+                        <button class="btn-copy" onclick="copyToClipboard('+918885776712')">
+                            <i class="fas fa-copy"></i>
+                        </button>
+                    </div>
+                    <div class="info-card">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <h3 id="contactLocation">Location</h3>
+                        <p>India</p>
+                    </div>
+                </div>
+                <div class="contact-form" data-aos="fade-left">
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label for="name" id="contactNameLabel">Name</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email" id="contactEmailLabel">Email</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message" id="contactMessageLabel">Message</label>
+                            <textarea id="message" name="message" rows="5" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary" id="sendBtn">
+                            <i class="fas fa-paper-plane"></i>
+                            <span id="sendText">Send Message</span>
+                        </button>
+                        <div id="formStatus" class="form-status"></div>
+                    </form>
+                </div>
+            </div>
+            
+            <!-- Mobile Contact Layout -->
+            <div class="mobile-only">
+                <div class="contact-mobile-grid">
+                    <div class="info-card" data-aos="fade-up">
+                        <i class="fas fa-envelope"></i>
+                        <h3 id="contactEmailMobile">Email</h3>
+                        <p>asdghffu@gmail.com</p>
+                        <button class="btn-copy" onclick="copyToClipboard('asdghffu@gmail.com')">
+                            <i class="fas fa-copy"></i>
+                        </button>
+                    </div>
+                    <div class="info-card" data-aos="fade-up" data-aos-delay="100">
+                        <i class="fas fa-phone"></i>
+                        <h3 id="contactPhoneMobile">Phone</h3>
+                        <p>+91 8885776712</p>
+                        <button class="btn-copy" onclick="copyToClipboard('+918885776712')">
+                            <i class="fas fa-copy"></i>
+                        </button>
+                    </div>
+                    <div class="info-card" data-aos="fade-up" data-aos-delay="200">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <h3 id="contactLocationMobile">Location</h3>
+                        <p>India</p>
+                    </div>
+                    <div class="contact-form" data-aos="fade-up" data-aos-delay="300">
+                        <form id="contactFormMobile">
+                            <div class="form-group">
+                                <label for="nameMobile" id="contactNameLabelMobile">Name</label>
+                                <input type="text" id="nameMobile" name="name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="emailMobile" id="contactEmailLabelMobile">Email</label>
+                                <input type="email" id="emailMobile" name="email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="messageMobile" id="contactMessageLabelMobile">Message</label>
+                                <textarea id="messageMobile" name="message" rows="5" required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary" id="sendBtnMobile">
+                                <i class="fas fa-paper-plane"></i>
+                                <span id="sendTextMobile">Send Message</span>
+                            </button>
+                            <div id="formStatusMobile" class="form-status"></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Social Links (Same for both) -->
+            <div class="social-links" data-aos="fade-up">
+                <h3 id="connectTitle">Connect With Me</h3>
+                <div class="social-icons">
+                    <a href="https://github.com/asdghgffu-code" target="_blank" class="social-icon github">
+                        <i class="fab fa-github"></i>
+                        <span>GitHub</span>
+                    </a>
+                    <a href="https://www.linkedin.com/in/ahmed-mohamed-18a501289/" target="_blank" class="social-icon linkedin">
+                        <i class="fab fa-linkedin"></i>
+                        <span>LinkedIn</span>
+                    </a>
+                    <a href="https://wa.me/+918885776712" target="_blank" class="social-icon whatsapp">
+                        <i class="fab fa-whatsapp"></i>
+                        <span>WhatsApp</span>
+                    </a>
+                    <a href="https://www.instagram.com/algnsahmed/" target="_blank" class="social-icon instagram">
+                        <i class="fab fa-instagram"></i>
+                        <span>Instagram</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- FAQ Section (Same for both) -->
+            <div class="faq-section" data-aos="fade-up">
+                <h3 id="faqTitle">Frequently Asked Questions</h3>
+                <div class="faq-list">
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span id="faq1">What is your response time?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p id="faq1Answer">I typically respond within 24 hours.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span id="faq2">Are you available for freelance work?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p id="faq2Answer">Yes, I'm currently available for freelance projects.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span id="faq3">What is your preferred contact method?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p id="faq3Answer">Email is the best way to reach me for detailed inquiries.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p id="footerText">&copy; 2024 Ahmed Mohamed. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <div id="projectModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2 id="modalTitle"></h2>
+            <div class="modal-gallery">
+                <button class="gallery-nav prev-img"><i class="fas fa-chevron-left"></i></button>
+                <div class="gallery-slider">
+                    <div class="slider" id="modalSlider"></div>
+                </div>
+                <button class="gallery-nav next-img"><i class="fas fa-chevron-right"></i></button>
+            </div>
+            <div class="gallery-dots" id="galleryDots"></div>
+            <p id="modalDesc"></p>
+            <div class="modal-buttons">
+                <button class="btn btn-secondary" id="modalBackBtn">Back to Projects</button>
+                <div class="modal-nav-buttons">
+                    <button class="btn btn-secondary" id="modalPrevBtn"><i class="fas fa-arrow-left"></i> Previous</button>
+                    <button class="btn btn-secondary" id="modalNextBtn">Next <i class="fas fa-arrow-right"></i></button>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
-</div>
 
-</section>
-
-
-<section id="contact" class="contact">
-
-<h2>Contact</h2>
-
-<p>Email: ahmed@email.com</p>
-
-<p>Phone: +91 000000000</p>
-
-</section>
-
-<script src="profile.js"></script>
-                              
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="profile.js"></script>
 </body>
 </html>
